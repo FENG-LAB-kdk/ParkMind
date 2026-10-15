@@ -22,7 +22,7 @@ import { useTheme } from './useTheme'
  * 2. 内存治理:每个实例在容器卸载时 dispose;resize 用 ResizeObserver +
  *    rAF 合并(同一帧内多次触发只执行一次)。改良自原 aiC 项目
  *    (它监听 window.resize + element-resize-detector,多图场景互相干扰)
- * 3. 主题联动:echarts 不支持运行时改主题,换肤必须 dispose 重建 —— 
+ * 3. 主题联动:echarts 不支持运行时改主题,换肤必须 dispose 重建 ——
  * 4. 不用 appendData:该方法官方仅支持 scatter / lines 系列,本项目折线图是 line,
  *    调了也不生效 —— 实时更新一律走"增量 setOption"(merge 模式,只传 series.data)
  */
