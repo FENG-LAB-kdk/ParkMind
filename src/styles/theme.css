@@ -1,0 +1,49 @@
+/**
+ * 主题系统 —— CSS 变量 + html[data-theme] 切换
+ *
+ * 【主题系统】为什么用 CSS 变量而非多套 css 文件:
+ * 1. 运行时切换只需改 html 的 data-theme,全站(含业务组件)即时响应,零重编译
+ * 2. 变量天然继承与覆盖:大屏区域通过 .screen-root 覆盖局部变量,形成深色面板,
+ *    与后台亮/暗主题互不干扰(ECharts 主题联动见 useChart)
+ */
+:root {
+  /* ---- 品牌色 ---- */
+  --pm-primary: #2563eb;
+  --pm-primary-light: #3b82f6;
+  --pm-primary-bg: rgba(37, 99, 235, 0.1);
+
+  /* ---- 中性色 ---- */
+  --pm-bg-page: #f4f6fa;
+  --pm-bg-card: #ffffff;
+  --pm-border: #e5e7eb;
+
+  --pm-text-1: #1f2329;
+  --pm-text-2: #646a73;
+  --pm-text-3: #a0a6af;
+
+  /* ---- 语义色(图表/状态通用色板,与 useChart 主题 JSON 保持同源) ---- */
+  --pm-success: #16a34a;
+  --pm-warning: #f59e0b;
+  --pm-danger: #ef4444;
+  --pm-info: #64748b;
+
+  /* ---- 大屏色板(screen-root 作用域内生效,浅色主题下大屏依旧深色) ---- */
+  --screen-bg: #050d1f;
+  --screen-bg-panel: rgba(13, 38, 76, 0.72);
+  --screen-bg-panel-2: rgba(8, 26, 54, 0.75);
+  --screen-border: rgba(64, 158, 255, 0.28);
+  --screen-text-main: #d8f0ff;
+  --screen-text-sub: #7fb3e8;
+  --screen-accent: #22d3ee;
+  --screen-gold: #f5c542;
+}
+
+/* 暗色主题:覆盖中性色变量(大屏变量不动) */
+html[data-theme='dark'] {
+  --pm-bg-page: #0f1420;
+  --pm-bg-card: #1a2233;
+  --pm-border: #2a3450;
+  --pm-text-1: #e8ecf4;
+  --pm-text-2: #9aa4b8;
+  --pm-text-3: #5f6a80;
+}
