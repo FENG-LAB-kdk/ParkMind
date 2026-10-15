@@ -1,0 +1,66 @@
+{
+  "name": "parkmind",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ParkMind 智慧园区综合运营平台 —— 运营后台 / 实时数据大屏 / 园区分布地图 / 三维态势，内置 Node 数据服务(Vue3 + TS + Vite + Pinia + Element Plus + vxe-table + ECharts5 + Three.js)",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "vite",
+    "dev:server": "node server/src/index.js",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.app.json",
+    "lint": "eslint --cache .",
+    "format": "prettier --write src/",
+    "format-check": "prettier --check src/",
+    "test": "vitest",
+    "test-coverage": "vitest run --coverage",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "axios": "^1.7.9",
+    "echarts": "^5.6.0",
+    "element-plus": "^2.9.3",
+    "pinia": "^2.3.0",
+    "three": "^0.180.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vxe-pc-ui": "^4.3.0",
+    "vxe-table": "^4.10.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "@types/node": "^22.10.5",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/coverage-v8": "^5.0.1",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/test-utils": "^2.5.1",
+    "cors": "^2.8.5",
+    "eslint": "^10.10.0",
+    "eslint-plugin-vue": "^10.11.0",
+    "express": "^4.21.2",
+    "husky": "^9.1.7",
+    "jsdom": "^30.1.0",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.8",
+    "typescript": "~5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^5.0.1",
+    "vue-tsc": "^2.2.0",
+    "ws": "^8.18.0"
+  },
+  "lint-staged": {
+    "*.{ts,mts,tsx,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

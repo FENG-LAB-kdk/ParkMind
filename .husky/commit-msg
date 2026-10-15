@@ -1,0 +1,12 @@
+# commit-msg —— 校验提交信息是否符合 Conventional Commits 规范
+#
+# 【来源】写法逐字取自 commitlint 官方 Local setup 指南:
+#   https://commitlint.js.org/guides/local-setup.html
+#   官方原文:`echo "npx --no -- commitlint --edit $1" > .husky/commit-msg`
+#   `--no` 是 npx 的参数,禁止 npx 在本地找不到包时去远程拉一个临时包 ——
+#   CI 和无网环境下必须这样,否则钩子会因为联网失败而挂掉。
+#
+# 【为什么单独一个钩子】commit-msg 钩子接收一个参数:本次提交信息所在的临时文件路径。
+# 必须用 --edit "$1" 让 commitlint 去读那个文件,而不是读 stdin ——
+# 这样 `git commit -m "..."` 和 `git commit`(打开编辑器写多行)两种方式都能校验到。
+npx --no -- commitlint --edit $1

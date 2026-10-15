@@ -1,0 +1,21 @@
+# .editorconfig —— 编辑器层面的代码风格约定
+#
+# 【来源】逐字取自 Vue 官方脚手架 create-vue 的模板:
+#   https://github.com/vuejs/create-vue/blob/main/template/linting/base/_editorconfig
+#   唯一改动:max_line_length 100 → 120,与本项目 .prettierrc.json 的 printWidth 对齐
+#   (create-vue 是 editorconfig + prettierrc 成对生成、两边都是 100;
+#    本项目沿用了既有的 printWidth 120,这里跟着改,避免出现"两个配置文件互相打架")
+#
+# 【和 Prettier 的分工】Prettier 管保存那一刻的排版结果(引号/分号/换行宽度),
+# EditorConfig 管敲代码时的即时行为(Tab 插空格还是制表符、换行符 LF 还是 CRLF)。
+# Prettier 不读 EditorConfig,所以具体排版规则一律以 .prettierrc.json 为准。
+root = true
+
+[*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue,css,scss,sass,less,styl}]
+charset = utf-8
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+max_line_length = 120

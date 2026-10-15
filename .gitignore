@@ -1,0 +1,22 @@
+node_modules
+dist
+dist-ssr
+# vitest run --coverage 生成的报告目录(见 package.json 的 test-coverage)
+coverage
+*.local
+*.tsbuildinfo
+*.log
+# eslint --cache 的缓存产物(见 package.json 的 lint 脚本);本地缓存,不入库
+.eslintcache
+# 环境变量:大模型 API Key 等机密只放本地 .env,绝不入库
+# 需要的变量清单提交在 .env.example 里
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# AI 协作指令:本地开发用,不对外公开
+CLAUDE.md

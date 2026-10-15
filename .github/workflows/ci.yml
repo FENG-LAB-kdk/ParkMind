@@ -1,0 +1,89 @@
+# CI —— PR / 主干推送时自动跑四道质量门禁
+#
+# 【结构来源】antfu/vitesse 的 .github/workflows/ci.yml
+#   https://github.com/antfu/vitesse/blob/main/.github/workflows/ci.yml
+#   沿用了它"每个门禁一个独立 job"的组织方式 —— 每个 job 在 PR 页面是一条独立的
+#   状态检查,挂了能一眼看出是 lint 挂还是 test 挂,不用翻一长串日志。
+#
+# 【和 vitesse 的差异(均为必要适配,非自创)】
+#   1. vitesse 用 pnpm,本项目用 npm(package-lock.json)→ 换成 setup-node 的 cache: npm + npm ci
+#   2. vitesse 把 build 放在 e2e job 里顺带跑,本项目没有 e2e,单独给 build 一个 job
+#   3. 新增 format-check job:npm run format 是 --write(会改文件),CI 必须用 --check
+#      只验证不修改 —— 这是 Prettier 官方文档明确给出的 CI 用法:
+#      https://prettier.io/docs/cli#--check
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Prettier
+        run: npm run format-check
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # 用 test-coverage 而不是 test:CI 里 process.env.CI 为真,
+      # vitest 会自动关掉 watch 模式跑一次;这里额外要覆盖率数字,所以用 run --coverage
+      - name: Unit test
+        run: npm run test-coverage
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
